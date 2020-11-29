@@ -1,0 +1,175 @@
+<header class="page-title-bar">
+  <div class="d-md-flex align-items-md-start">
+    <h1 class="page-title mr-sm-auto">Bản tin thô đã mix</h1>
+    <div class="btn-toolbar">
+      <button (click)="export()" type="button" class="btn btn-light"><i class="oi oi-data-transfer-download"></i> <span
+        class="ml-1">Xuất excel</span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="page-section">
+
+  <div class="card card-fluid">
+
+    <div class="card-header">
+
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active show" data-toggle="tab" href="#tab1">Tất cả</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#tab2">Bis t5 pro</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#tab3">Ist2</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <div class="form-group row">
+        <div class="input-group input-group-alt col-6">
+          <div class="input-group-prepend">
+            <button class="btn btn-secondary">Tìm kiếm imei</button>
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+            </div>
+            <input (change)="getFilterLogs();" [(ngModel)]="filters.imei" type="text" class="form-control"
+                   placeholder="Nhập từ khóa tìm kiếm...">
+          </div>
+        </div>
+        <div class="input-group input-group-alt col-6">
+          <div class="input-group-prepend">
+            <button class="btn btn-secondary">Khoảng ngày</button>
+          </div>
+          <div class="input-group">
+            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.from" type="date" class="form-control"
+                   placeholder="Từ ngày">
+            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.to" type="date" class="form-control"
+                   placeholder="Đến ngày">
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <!-- .table -->
+        <table class="table table-bordered" #tableElement>
+          <!-- thead -->
+          <thead>
+          <tr>
+            <td colspan="6">Quản lý</td>
+            <td colspan="8">Login</td>
+            <td colspan="27">REALTIME / ALARM / LOGIN / RESEND../</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Mã bản tin</td>
+            <td>Thời gian sever nhận gói tin</td>
+            <td>Loại gói tin MIX</td>
+            <td>Dòng thiết bị</td>
+            <td>Imei thiết bị</td>
+            <td>ID thiết bị</td>
+
+            <td>Imei thiết bị</td>
+            <td>UTC+7 login</td>
+            <td>Tọa độ Lat/Long</td>
+            <td>Firmware Version</td>
+            <td>Boot version</td>
+            <td>Hardware Version</td>
+            <td>Sim Serial</td>
+            <td>Login reason</td>
+
+            <td>UTC+7 realtime 10S</td>
+            <td>Vị trí LATLONG Realtime 10S</td>
+            <td>Góc chuyển động 10s</td>
+            <td>Vận tốc GPS 10S</td>
+            <td>Cường độ GSM 10S</td>
+            <td>Thông tin GSM 10S</td>
+            <td>Trạng thái GPS 10S</td>
+            <td>Trạng thái Fram 10S</td>
+            <td>Trạng thái Flash 10S</td>
+            <td>Trạng thái kết nối RFID 10S</td>
+            <td>Điện áp cấp thiết bị 10S</td>
+            <td>inAnalog3V.1</td>
+            <td>inAnalog3V.2</td>
+            <td>inAnalog5V.1</td>
+            <td>inAnalog5V.2</td>
+            <td>inVolLevel.1</td>
+            <td>inVolLevel.2</td>
+            <td>inVolLevel.3</td>
+            <td>Trạng thái quẹt thẻ lái xe</td>
+            <td>Cảm biến ID THẺ RFID</td>
+            <td>Lượng thời gian lái xe liên tục của tài xế</td>
+            <td>Cảnh báo quá TGLXLT4H</td>
+            <td>Cảnh báo quá TGLXTN10H</td>
+            <td>Cảnh báo quá vận tốc tối đa</td>
+            <td>Trạng thái Pin-KHCGT06</td>
+            <td>Trạng thái cường độ GSM</td>
+            <td>ID lái xe-IST2</td>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr *ngFor="let log of logs">
+            <td>{{log._id|null}}</td>
+            <td class="svt">{{log.svt| date:'HH:mm:ss dd/MM/YYYY'}}</td>
+            <td>{{log.event|null}}</td>
+            <td>{{log.type|null}}</td>
+            <td>{{log.imei|null}}</td>
+            <td>{{log.device ? log.device.DeviceId : null|null}}</td>
+
+            <td [ngClass]="{'hidden':log.type!=='login'}">{{log.imei|null}}</td>
+            <td [ngClass]="{'hidden':log.type!=='login'}">{{log.utc| date:'HH:mm:ss dd/MM/YYYY'}}</td>
+            <td [ngClass]="{'hidden':log.type!=='login'}">
+              {{!log.loc ? null : log.loc.lat}}
+              -{{!log.loc ? null : log.loc.lon|null}}</td>
+            <td [ngClass]="{'hidden':log.type!=='login'}">{{!log.dvi ? null : log.dvi.fwv|null}}</td>
+            <td [ngClass]="{'hidden':log.type!=='login'}">{{!log.dvi ? null : log.dvi.btv|null}}</td>
+            <td [ngClass]="{'hidden':log.type!=='login'}">{{!log.dvi ? null : log.dvi.hwv|null}}</td>
+            <td [ngClass]="{'hidden':log.type!=='login'}">{{!log.dvi ? null : log.dvi.sim|null}}</td>
+            <td [ngClass]="{'hidden':log.type!=='login'}">{{!log.dvi ? null : log.dvi.lr|null}}</td>
+
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.loc ? null : log.loc.utc|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.loc ? null : log.loc.lat}}
+              -{{!log.loc ? null : log.loc.lon|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.loc ? null : log.loc.course|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.loc ? null : log.loc.spd|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.gsig|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.gsm|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.gps|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.fram|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.flash|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.rfid|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.drs ? null : log.drs.exts_1|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.temp_1|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.temp_2|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.os_1|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.os_2|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.os_2|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.airc|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.door|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.drst|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.rfid|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.drs ? null : log.drs.drvt|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.dc|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.dot|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.ovs|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.bstt|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.gsig|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.dri ? null : log.dri.drid|null}}</td>
+
+          </tr>
+          <tr>
+            <td colspan="20">
+              <button (click)="getMoreLogs()" class="btn btn-sm btn-secondary">Xem thêm +20</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="loading" *ngIf="loading">
+        <p>Đang tải dữ liệu...</p>
+      </div>
+    </div>
+  </div>
+</div>
