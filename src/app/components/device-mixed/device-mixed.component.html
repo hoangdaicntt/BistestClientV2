@@ -45,67 +45,67 @@
             <button class="btn btn-secondary">Khoảng ngày</button>
           </div>
           <div class="input-group">
-            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.from" type="date" class="form-control"
+            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.from" type="datetime-local" class="form-control"
                    placeholder="Từ ngày">
-            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.to" type="date" class="form-control"
+            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.to" type="datetime-local" class="form-control"
                    placeholder="Đến ngày">
           </div>
         </div>
       </div>
       <div class="table-responsive">
         <!-- .table -->
-        <table class="table table-bordered" #tableElement>
+        <table class="table table-bordered">
           <!-- thead -->
           <thead>
           <tr>
-            <td colspan="6">Quản lý</td>
-            <td colspan="8">Login</td>
-            <td colspan="27">REALTIME / ALARM / LOGIN / RESEND../</td>
+            <th colspan="6">Quản lý</th>
+            <th colspan="8">Login</th>
+            <th colspan="27">REALTIME / ALARM / LOGIN / RESEND../</th>
           </tr>
           <tr>
-            <td rowspan="2">Mã bản tin</td>
-            <td>Thời gian sever nhận gói tin</td>
-            <td>Loại gói tin MIX</td>
-            <td>Dòng thiết bị</td>
-            <td>Imei thiết bị</td>
-            <td>ID thiết bị</td>
+            <th>Mã bản tin</th>
+            <th>Thời gian sever nhận gói tin</th>
+            <th>Loại gói tin MIX</th>
+            <th>Dòng thiết bị</th>
+            <th>Imei thiết bị</th>
+            <th>ID thiết bị</th>
 
-            <td>Imei thiết bị</td>
-            <td>UTC+7 login</td>
-            <td>Tọa độ Lat/Long</td>
-            <td>Firmware Version</td>
-            <td>Boot version</td>
-            <td>Hardware Version</td>
-            <td>Sim Serial</td>
-            <td>Login reason</td>
+            <th>Imei thiết bị</th>
+            <th>UTC+7 login</th>
+            <th>Tọa độ Lat/Long</th>
+            <th>Firmware Version</th>
+            <th>Boot version</th>
+            <th>Hardware Version</th>
+            <th>Sim Serial</th>
+            <th>Login reason</th>
 
-            <td>UTC+7 realtime 10S</td>
-            <td>Vị trí LATLONG Realtime 10S</td>
-            <td>Góc chuyển động 10s</td>
-            <td>Vận tốc GPS 10S</td>
-            <td>Cường độ GSM 10S</td>
-            <td>Thông tin GSM 10S</td>
-            <td>Trạng thái GPS 10S</td>
-            <td>Trạng thái Fram 10S</td>
-            <td>Trạng thái Flash 10S</td>
-            <td>Trạng thái kết nối RFID 10S</td>
-            <td>Điện áp cấp thiết bị 10S</td>
-            <td>inAnalog3V.1</td>
-            <td>inAnalog3V.2</td>
-            <td>inAnalog5V.1</td>
-            <td>inAnalog5V.2</td>
-            <td>inVolLevel.1</td>
-            <td>inVolLevel.2</td>
-            <td>inVolLevel.3</td>
-            <td>Trạng thái quẹt thẻ lái xe</td>
-            <td>Cảm biến ID THẺ RFID</td>
-            <td>Lượng thời gian lái xe liên tục của tài xế</td>
-            <td>Cảnh báo quá TGLXLT4H</td>
-            <td>Cảnh báo quá TGLXTN10H</td>
-            <td>Cảnh báo quá vận tốc tối đa</td>
-            <td>Trạng thái Pin-KHCGT06</td>
-            <td>Trạng thái cường độ GSM</td>
-            <td>ID lái xe-IST2</td>
+            <th>UTC+7 realtime 10S</th>
+            <th>Vị trí LATLONG Realtime 10S</th>
+            <th>Góc chuyển động 10s</th>
+            <th>Vận tốc GPS 10S</th>
+            <th>Cường độ GSM 10S</th>
+            <th>Thông tin GSM 10S</th>
+            <th>Trạng thái GPS 10S</th>
+            <th>Trạng thái Fram 10S</th>
+            <th>Trạng thái Flash 10S</th>
+            <th>Trạng thái kết nối RFID 10S</th>
+            <th>Điện áp cấp thiết bị 10S</th>
+            <th>inAnalog3V.1</th>
+            <th>inAnalog3V.2</th>
+            <th>inAnalog5V.1</th>
+            <th>inAnalog5V.2</th>
+            <th>inVolLevel.1</th>
+            <th>inVolLevel.2</th>
+            <th>inVolLevel.3</th>
+            <th>Trạng thái quẹt thẻ lái xe</th>
+            <th>Cảm biến ID THẺ RFID</th>
+            <th>Lượng thời gian lái xe liên tục của tài xế</th>
+            <th>Cảnh báo quá TGLXLT4H</th>
+            <th>Cảnh báo quá TGLXTN10H</th>
+            <th>Cảnh báo quá vận tốc tối đa</th>
+            <th>Trạng thái Pin-KHCGT06</th>
+            <th>Trạng thái cường độ GSM</th>
+            <th>ID lái xe-IST2</th>
           </tr>
           </thead>
 

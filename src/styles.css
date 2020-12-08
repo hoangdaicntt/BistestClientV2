@@ -37,3 +37,7 @@ td.hidden {
 .card-header {
   display: none;
 }
+
+.hidden{
+  display: none;
+}

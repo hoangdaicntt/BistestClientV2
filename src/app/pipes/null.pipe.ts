@@ -6,7 +6,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class NullPipe implements PipeTransform {
 
   transform(value: unknown, ...args: unknown[]): unknown {
-    return value ? value : '--';
+    return (!!value || value === 0) ? value : '--';
   }
 
 }

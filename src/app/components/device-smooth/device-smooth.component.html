@@ -45,9 +45,9 @@
             <button class="btn btn-secondary">Khoảng ngày</button>
           </div>
           <div class="input-group">
-            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.from" type="date" class="form-control"
+            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.from" type="datetime-local" class="form-control"
                    placeholder="Từ ngày">
-            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.to" type="date" class="form-control"
+            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.to" type="datetime-local" class="form-control"
                    placeholder="Đến ngày">
           </div>
         </div>
@@ -63,7 +63,7 @@
             <th colspan="27">REALTIME / ALARM / LOGIN / RESEND../</th>
           </tr>
           <tr>
-            <th rowspan="2">Mã bản tin</th>
+            <th>Mã bản tin</th>
             <th>Thời gian từ gói tin</th>
             <th>Thời gian sever nhận gói tin</th>
             <th>Loại gói tin MIX</th>
@@ -141,7 +141,7 @@
             <td [ngClass]="{'hidden':log.type==='login'}" class="svt">{{log.loc.utc| date:'HH:mm:ss dd/MM/YYYY'}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}" class="log-address"><span>{{log.loc.addr|null}}</span></td>
             <td [ngClass]="{'hidden':log.type==='login'}">{{log.loc.course|null}}</td>
-            <td [ngClass]="{'hidden':log.type==='login'}">{{log.stt.spd|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{log.loc.spd|null}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}">{{log.stt.gsig|null}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}" class="gsm">{{log.stt.gsm|null}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}" class="gps">{{log.stt.gps|null}}</td>

@@ -45,16 +45,16 @@
             <button class="btn btn-secondary">Khoảng ngày</button>
           </div>
           <div class="input-group">
-            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.from" type="date" class="form-control"
+            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.from" type="datetime-local" class="form-control"
                    placeholder="Từ ngày">
-            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.to" type="date" class="form-control"
+            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.to" type="datetime-local" class="form-control"
                    placeholder="Đến ngày">
           </div>
         </div>
       </div>
       <div class="table-responsive">
         <!-- .table -->
-        <table class="table table-bordered" #tableElement>
+        <table class="table table-bordered">
           <!-- thead -->
           <thead>
           <tr>
@@ -62,7 +62,7 @@
               <input (change)="selectAllRows()" [(ngModel)]="inputSelectAll" type="checkbox" id="checkAll"/>
             </th>
             <th class="logId" rowspan="2">Mã bản tin</th>
-            <th class="deviceId" rowspan="2"></th>
+            <th class="deviceId" rowspan="2">Dòng thiết bị</th>
             <th class="imei" rowspan="2">IMEI</th>
             <th class="fwv" rowspan="2">Firmware version</th>
             <th class="btv" rowspan="2">Boot version</th>

@@ -11,9 +11,9 @@ export class AppService {
   constructor(private http: HttpClient) {
   }
 
-  getLogs(filters: any): Promise<any> {
+  getLogs(filters: any, all = false): Promise<any> {
     const {username, password} = environment.user;
-    return this.http.post(environment.host + '/log', {filters}, {
+    return this.http.post(environment.host + '/log', {filters, all}, {
       headers: {
         Username: username,
         Password: password
@@ -21,9 +21,9 @@ export class AppService {
     }).toPromise();
   }
 
-  getUnmix(filters: any): Promise<any> {
+  getUnmix(filters: any, all = false): Promise<any> {
     const {username, password} = environment.user;
-    return this.http.post(environment.host + '/mix', {filters, remix: false}, {
+    return this.http.post(environment.host + '/mix', {filters, remix: false, all}, {
       headers: {
         Username: username,
         Password: password
@@ -31,9 +31,9 @@ export class AppService {
     }).toPromise();
   }
 
-  getMixed(filters: any): Promise<any> {
+  getMixed(filters: any, all = false): Promise<any> {
     const {username, password} = environment.user;
-    return this.http.post(environment.host + '/mix', {filters, remix: true}, {
+    return this.http.post(environment.host + '/mix', {filters, remix: true, all}, {
       headers: {
         Username: username,
         Password: password
@@ -41,9 +41,9 @@ export class AppService {
     }).toPromise();
   }
 
-  getSmooth(filters: any): Promise<any> {
+  getSmooth(filters: any, all = false): Promise<any> {
     const {username, password} = environment.user;
-    return this.http.post(environment.host + '/smooth', {filters}, {
+    return this.http.post(environment.host + '/smooth', {filters, all}, {
       headers: {
         Username: username,
         Password: password

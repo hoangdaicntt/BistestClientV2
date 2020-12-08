@@ -13,7 +13,7 @@ export class ExportService {
   fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   fileExtension = '.xlsx';
 
-  public exportExcel(htmlData: any, fileName: string): void {
+  exportExcel(htmlData: any, fileName: string): void {
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(htmlData);
     const wb: XLSX.WorkBook = {Sheets: {data: ws}, SheetNames: ['data']};
     const excelBuffer: any = XLSX.write(wb, {bookType: 'xlsx', type: 'array'});
@@ -23,5 +23,16 @@ export class ExportService {
   private saveExcelFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], {type: this.fileType});
     FileSaver.saveAs(data, fileName + this.fileExtension);
+  }
+
+
+  exportExcelJson(jsonData: any, fileName: string, merges = []): void {
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonData, {
+      skipHeader: true
+    });
+    ws['!merges'] = merges;
+    const wb: XLSX.WorkBook = {Sheets: {data: ws}, SheetNames: ['data']};
+    const excelBuffer: any = XLSX.write(wb, {bookType: 'xlsx', type: 'array'});
+    this.saveExcelFile(excelBuffer, fileName);
   }
 }
