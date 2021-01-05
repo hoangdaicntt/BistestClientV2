@@ -60,7 +60,7 @@
           <tr>
             <th colspan="6">Quản lý</th>
             <th colspan="8">Login</th>
-            <th colspan="27">REALTIME / ALARM / LOGIN / RESEND../</th>
+            <th colspan="27">REALTIME / ALARM / RESEND../</th>
           </tr>
           <tr>
             <th>Mã bản tin</th>
@@ -116,10 +116,10 @@
             <td>{{log.event|null}}</td>
             <td>{{log.type|null}}</td>
             <td>{{log.imei|null}}</td>
-            <td>{{log.device ? log.device.DeviceId : null|null}}</td>
+            <td>{{log.deviceId|null}}</td>
 
             <td [ngClass]="{'hidden':log.type!=='login'}">{{log.imei|null}}</td>
-            <td [ngClass]="{'hidden':log.type!=='login'}">{{log.utc| date:'HH:mm:ss dd/MM/YYYY'}}</td>
+            <td [ngClass]="{'hidden':log.type!=='login'}">{{log.loc.utc| date:'HH:mm:ss dd/MM/YYYY'}}</td>
             <td [ngClass]="{'hidden':log.type!=='login'}">
               {{!log.loc ? null : log.loc.lat}}
               -{{!log.loc ? null : log.loc.lon|null}}</td>
@@ -129,7 +129,7 @@
             <td [ngClass]="{'hidden':log.type!=='login'}">{{!log.dvi ? null : log.dvi.sim|null}}</td>
             <td [ngClass]="{'hidden':log.type!=='login'}">{{!log.dvi ? null : log.dvi.lr|null}}</td>
 
-            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.loc ? null : log.loc.utc|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.loc ? null : log.loc.utc| date:'HH:mm:ss dd/MM/YYYY'}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}">{{!log.loc ? null : log.loc.lat}}
               -{{!log.loc ? null : log.loc.lon|null}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}">{{!log.loc ? null : log.loc.course|null}}</td>
@@ -145,9 +145,10 @@
             <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.temp_2|null}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.os_1|null}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.os_2|null}}</td>
-            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.os_2|null}}</td>
-            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.airc|null}}</td>
-            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.door|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.invol_1|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.invol_2|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.invol_3|null}}</td>
+            <!--            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.drst|null}}</td>-->
             <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.drst|null}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.rfid|null}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}">{{!log.drs ? null : log.drs.drvt|null}}</td>

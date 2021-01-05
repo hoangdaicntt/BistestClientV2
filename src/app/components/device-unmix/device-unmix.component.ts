@@ -62,7 +62,7 @@ export class DeviceUnmixComponent implements OnInit {
           this.logs = value.data.list;
           this.filters.afterId = value.data.list.length > 0 ? (this.logs[this.logs.length - 1]._id) : null;
         }
-        this.filters.startId = value.data.startList[0]._id;
+        this.filters.startId = value.data.startList[0] ? value.data.startList[0]._id : null;
       }
     }
     this.loading = false;
@@ -88,11 +88,15 @@ export class DeviceUnmixComponent implements OnInit {
     }
     const fromDateTime = moment(this.filters.date.from, 'YYYY-MM-DDTHH:mm').toDate().getTime();
     const toDateTime = moment(this.filters.date.to, 'YYYY-MM-DDTHH:mm').toDate().getTime();
-    if (toDateTime <= fromDateTime || (toDateTime - fromDateTime) > 172800000 * 2) {
+    if (toDateTime <= fromDateTime || (toDateTime - fromDateTime) > 172800000) {
       alert('Khoảng thời gian không hợp lệ!');
       return;
     }
     await this.getLogs(true);
+    if (!this.logsExport || this.logsExport.length <= 0) {
+      alert('Không thể xuất excel, vui lòng thử lại sau!');
+      return;
+    }
     const headerTable = [
       {
         0: '',
@@ -109,7 +113,7 @@ export class DeviceUnmixComponent implements OnInit {
         11: '',
         12: '',
         13: '',
-        14: 'REALTIME / ALARM / LOGIN / RESEND../',
+        14: 'REALTIME / ALARM / RESEND../',
         15: '',
         16: '',
         17: '',
@@ -187,20 +191,20 @@ export class DeviceUnmixComponent implements OnInit {
       const log = this.logsExport[i];
       const row = {
         0: (log._id),
-        1: (log.svt),
+        1: (moment(new Date(log.svt)).format('HH:mm:ss DD/MM/yyyy')),
         2: (log.event),
         3: (log.type),
         4: (log.imei),
         5: (log.device ? log.device.DeviceId : null),
         6: (log.type !== 'login') ? null : (log.imei),
-        7: (log.type !== 'login') ? null : (log.utc),
+        7: (log.type !== 'login') ? null : (moment(new Date(log.loc.utc)).format('HH:mm:ss DD/MM/yyyy')),
         8: (log.type !== 'login') ? null : (!log.loc ? null : log.loc.lat) + (!log.loc ? null : log.loc.lon),
         9: (log.type !== 'login') ? null : (!log.dvi ? null : log.dvi.fwv),
         10: (log.type !== 'login') ? null : (!log.dvi ? null : log.dvi.btv),
         11: (log.type !== 'login') ? null : (!log.dvi ? null : log.dvi.hwv),
         12: (log.type !== 'login') ? null : (!log.dvi ? null : log.dvi.sim),
         13: (log.type !== 'login') ? null : (!log.dvi ? null : log.dvi.lr),
-        14: (log.type === 'login') ? null : (!log.loc ? null : log.loc.utc),
+        14: (log.type === 'login') ? null : (!log.loc ? null : moment(new Date(log.loc.utc)).format('HH:mm:ss DD/MM/yyyy')),
         15: (log.type === 'login') ? null : ((!log.loc ? null : log.loc.lat) + (!log.loc ? null : log.loc.lon)),
         16: (log.type === 'login') ? null : (!log.loc ? null : log.loc.course),
         17: (log.type === 'login') ? null : (!log.loc ? null : log.loc.spd),

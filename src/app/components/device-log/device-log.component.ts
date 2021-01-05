@@ -63,7 +63,7 @@ export class DeviceLogComponent implements OnInit {
           this.logs = value.data.list;
           this.filters.afterId = value.data.list.length > 0 ? (this.logs[this.logs.length - 1]._id) : null;
         }
-        this.filters.startId = value.data.startList[0]._id;
+        this.filters.startId = value.data.startList[0] ? value.data.startList[0]._id : null;
       }
     }
     this.loading = false;
@@ -89,11 +89,15 @@ export class DeviceLogComponent implements OnInit {
     }
     const fromDateTime = moment(this.filters.date.from, 'YYYY-MM-DDTHH:mm').toDate().getTime();
     const toDateTime = moment(this.filters.date.to, 'YYYY-MM-DDTHH:mm').toDate().getTime();
-    if (toDateTime <= fromDateTime || (toDateTime - fromDateTime) > 172800000 * 2) {
+    if (toDateTime <= fromDateTime || (toDateTime - fromDateTime) > 172800000) {
       alert('Khoảng thời gian không hợp lệ!');
       return;
     }
     await this.getLogs(true);
+    if (!this.logsExport || this.logsExport.length <= 0) {
+      alert('Không thể xuất excel, vui lòng thử lại sau!');
+      return;
+    }
     const headerTable = [
       {
         0: '',
@@ -200,10 +204,10 @@ export class DeviceLogComponent implements OnInit {
         4: (!log.dvi ? null : log.dvi.btv),
         5: (!log.dvi ? null : log.dvi.sim),
         6: (!log.dvi ? null : log.dvi.lr),
-        7: (log.svt),
+        7: (moment(new Date(log.svt)).format('HH:mm:ss DD/MM/yyyy')),
         8: (log.event),
         9: (!log.loc ? null : log.loc.pkgn),
-        10: (!log.loc ? null : log.loc.utc),
+        10: (!log.loc ? null : moment(new Date(log.loc.utc)).format('HH:mm:ss DD/MM/yyyy')),
         11: (!log.loc ? null : log.loc.lat),
         12: (!log.loc ? null : log.loc.lon),
         13: (!log.loc ? null : log.loc.course),
@@ -240,8 +244,6 @@ export class DeviceLogComponent implements OnInit {
       };
       table.push(row);
     }
-    this.exportService.exportExcelJson(table, 'table_bigtest', [
-
-    ]);
+    this.exportService.exportExcelJson(table, 'table_bigtest', []);
   }
 }

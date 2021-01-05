@@ -60,7 +60,7 @@
           <tr>
             <th colspan="7">Quản lý</th>
             <th colspan="8">Login</th>
-            <th colspan="27">REALTIME / ALARM / LOGIN / RESEND../</th>
+            <th colspan="27">REALTIME / ALARM / RESEND../</th>
           </tr>
           <tr>
             <th>Mã bản tin</th>
@@ -119,12 +119,12 @@
           <tbody>
           <tr *ngFor="let log of logs">
             <td>{{log._id|null}}</td>
-            <td>{{log.svd|null}}</td>
+            <td>{{log.svd| date:'HH:mm:ss dd/MM/YYYY'}}</td>
             <td class="svt">{{log.svt| date:'HH:mm:ss dd/MM/YYYY'}}</td>
             <td>{{log.event|null}}</td>
             <td>{{log.type|null}}</td>
             <td>{{log.imei|null}}</td>
-            <td class="svt">{{log.device ? log.device.DeviceId : null|null|null}}</td>
+            <td>{{log.deviceId|null}}</td>
 
             <td [ngClass]="{'hidden':log.type!=='login'}">{{log.imei|null}}</td>
             <td class="svt" [ngClass]="{'hidden':log.type!=='login'}">{{log.loc.utc| date:'HH:mm:ss dd/MM/YYYY'}}</td>
@@ -153,9 +153,9 @@
             <td [ngClass]="{'hidden':log.type==='login'}">{{log.stt.temp_2_c|null}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}">{{log.stt.os_1_c|null}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}">{{log.stt.os_2_c|null}}</td>
-            <td [ngClass]="{'hidden':log.type==='login'}" class="acc_c">{{log.stt.acc_c|null}}</td>
-            <td [ngClass]="{'hidden':log.type==='login'}" class="airc_c">{{log.stt.airc_c|null}}</td>
-            <td [ngClass]="{'hidden':log.type==='login'}" class="door_c">{{log.stt.door_c|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.invol_1_c|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.invol_2_c|null}}</td>
+            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.stt ? null : log.stt.invol_3_c|null}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}">{{null|null}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}" class="drst">{{log.drs.drst|null}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}" class="rfid2">{{log.drs.rfid2|null}}</td>
