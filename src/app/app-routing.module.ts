@@ -6,6 +6,7 @@ import {DeviceMixedComponent} from './components/device-mixed/device-mixed.compo
 import {DeviceSmoothComponent} from './components/device-smooth/device-smooth.component';
 import {AuthGuard} from './guard/auth.guard';
 import {AuthComponent} from './components/auth/auth.component';
+import {ErrorLogComponent} from './components/error-log/error-log.component';
 
 const routes: Routes = [
   {path: 'login', component: AuthComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: '', component: DeviceLogComponent, canActivate: [AuthGuard]},
   {path: 'device-unmix', component: DeviceUnmixComponent, canActivate: [AuthGuard]},
   {path: 'device-mixed', component: DeviceMixedComponent, canActivate: [AuthGuard]},
-  {path: 'device-smooth', component: DeviceSmoothComponent, canActivate: [AuthGuard]}
+  {path: 'device-smooth', component: DeviceSmoothComponent, canActivate: [AuthGuard]},
+  {path: 'error-log', component: ErrorLogComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

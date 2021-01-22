@@ -1,0 +1,185 @@
+<header class="page-title-bar">
+  <div class="d-md-flex align-items-md-start">
+    <h1 class="page-title mr-sm-auto">Gói tin firmware</h1>
+    <div class="btn-toolbar">
+      <button (click)="export();" type="button" class="btn btn-light"><i class="oi oi-data-transfer-download"></i> <span
+        class="ml-1">Xuất excel</span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="page-section">
+
+  <div class="card card-fluid">
+
+    <div class="card-header">
+
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active show" data-toggle="tab" href="#tab1">Tất cả</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#tab2">Bis t5 pro</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#tab3">Ist2</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <div class="form-group row">
+        <div class="input-group input-group-alt col-6">
+          <div class="input-group-prepend">
+            <button class="btn btn-secondary">Tìm kiếm imei</button>
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+            </div>
+            <input (change)="getFilterLogs();" [(ngModel)]="filters.imei" type="text" class="form-control"
+                   placeholder="Nhập từ khóa tìm kiếm...">
+          </div>
+        </div>
+        <div class="input-group input-group-alt col-6">
+          <div class="input-group-prepend">
+            <button class="btn btn-secondary">Khoảng ngày</button>
+          </div>
+          <div class="input-group">
+            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.from" type="datetime-local"
+                   class="form-control"
+                   placeholder="Từ ngày">
+            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.to" type="datetime-local" class="form-control"
+                   placeholder="Đến ngày">
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <!-- .table -->
+        <table class="table table-bordered">
+          <!-- thead -->
+          <thead>
+          <tr>
+            <th rowspan="2" style="max-width: 25px !important;min-width: auto !important;">
+              <input (change)="selectAllRows()" [(ngModel)]="inputSelectAll" type="checkbox" id="checkAll"/>
+            </th>
+            <th class="logId" rowspan="2">Mã bản tin</th>
+            <th class="deviceId" rowspan="2">Dòng thiết bị</th>
+            <th class="imei" rowspan="2">IMEI</th>
+            <th class="fwv" rowspan="2">Message error</th>
+            <th class="fwv" rowspan="2">Firmware version</th>
+            <th class="btv" rowspan="2">Boot version</th>
+            <th class="sim" rowspan="2">Serial sim</th>
+            <th class="lr" rowspan="2">Login Reason</th>
+            <th class="svt" rowspan="2">TG server nhận gói tin</th>
+            <th class="event" rowspan="2">Loại gói tin</th>
+            <th class="PckNub" rowspan="2">PckNub</th>
+            <th class="utc" rowspan="2">UTC</th>
+            <th class="lat" rowspan="2">LAT</th>
+            <th class="long" rowspan="2">LONG</th>
+            <th class="gcd" rowspan="2">Góc chuyển động</th>
+            <th class="vt" rowspan="2">Vận tốc <br>(SpdGPS)</th>
+            <th class="cdGSM" rowspan="2">Cường độ GSM</th>
+            <th class="nd1" rowspan="2">Nhiệt độ 1</th>
+            <th class="nd2" rowspan="2">Nhiệt độ 2</th>
+            <th class="device_status text-center" colspan="10">Device status</th>
+            <th class="ad1" rowspan="2">AD1</th>
+            <th class="ad2" rowspan="2">AD2</th>
+            <th class="lp" rowspan="2">Biển số xe</th>
+            <th class="idlx" rowspan="2">ID lái xe</th>
+            <th class="idlx" rowspan="2">Đăng nhập/đăng xuất</th>
+            <th class="drn" rowspan="2">Họ tên lái xe</th>
+            <th class="drl" rowspan="2">Số GPLX</th>
+            <th class="tglx" rowspan="2">TG lx trong ngày (phút)</th>
+            <th class="slvth" rowspan="2">SL vượt tốc độ trong ngày</th>
+            <th class="slddtn" rowspan="2">SL dừng đỗ trong ngày</th>
+            <th class="tglxlt" rowspan="2">TG lái xe liên tục</th>
+            <th class="slqtg" rowspan="2">SL quá TG lái xe liên tục</th>
+            <th class="thltxx" rowspan="2">Tốc độ lấy từ xung xe</th>
+            <th class="cb1" rowspan="2">Điện áp</th>
+            <th class="cb2" rowspan="2">Cảm biến mở rộng 1</th>
+            <th class="cb3" rowspan="2">Cảm biến mở rộng 2</th>
+          </tr>
+          <tr>
+            <th>Server (Bit 1)</th>
+            <th>GPS (Bit 2)</th>
+            <th>ACC (Bit 3)</th>
+            <th>Điều hòa (Bit 4)</th>
+            <th>Cửa (Bit 5)</th>
+            <th>Fram (Bit 6)</th>
+            <th>Flash (Bit 7)</th>
+            <th>RFID (Bit 8)</th>
+            <th>Digital out 1 (Bit 9)</th>
+            <th>Digital out 2 (Bit 10)</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr *ngFor="let log of logs">
+            <td style="max-width: 25px !important;min-width: auto !important;">
+              <input [checked]="log.selected" type="checkbox"/>
+            </td>
+            <td>{{log._id|null}}</td>
+            <td>{{log.data.Type|null}}</td>
+            <td>{{log.imei|null}}</td>
+            <td>{{log.error|null}}</td>
+            <td>{{!log.data.StatusInformation? null : log.data.StatusInformation.drid|null}}</td>
+
+            <td class="imei">{{!log.data.dvi ? null : log.data.dvi.btv|null}}</td>
+            <td class="imei">{{!log.data.dvi ? null : log.data.dvi.sim|null}}</td>
+            <td class="lr">{{!log.data.dvi ? null : log.data.dvi.lr|null}}</td>
+            <td class="svt">{{log.data.ServerTime| date:'HH:mm:ss dd/MM/YYYY'|null}}</td>
+            <td class="event">{{log.data.Event|null}}</td>
+            <td class="PckNub">{{!log.data.LocationData ? null : log.data.LocationData.pkgn|null}}</td>
+            <td
+              class="utc">{{!log.data.LocationData ? null : log.data.LocationData.DateTime | date:'HH:mm:ss dd/MM/YYYY'|null}}</td>
+            <td class="lat">{{!log.data.LocationData ? null : log.data.LocationData.Lat|null}}</td>
+            <td class="long">{{!log.data.LocationData ? null : log.data.LocationData.Lon|null}}</td>
+
+            <td class="gcd">{{!log.data.LocationData ? null : log.data.LocationData.Course|null}}</td>
+            <td class="vt">{{!log.data.LocationData ? null : log.data.LocationData.Speed|null}}</td>
+            <td class="cdGSM">{{!log.data.StatusInformation? null : log.data.StatusInformation.gsig|null}}</td>
+            <td class="nd1">{{!log.data.StatusInformation? null : log.data.StatusInformation.temp_1|null}}</td>
+            <td class="nd2">{{!log.data.StatusInformation? null : log.data.StatusInformation.temp_2|null}}</td>
+
+            <td class="device_status1">{{!log.data.StatusInformation? null : log.data.StatusInformation.gsm|null}}</td>
+            <td class="device_status2">{{!log.data.StatusInformation? null : log.data.StatusInformation.GPS|null}}</td>
+            <td class="device_status3">{{!log.data.StatusInformation? null : log.data.StatusInformation.acc|null}}</td>
+            <td class="device_status4">{{!log.data.StatusInformation? null : log.data.StatusInformation.airc|null}}</td>
+            <td class="device_status5">{{!log.data.StatusInformation? null : log.data.StatusInformation.door|null}}</td>
+            <td class="device_status6">{{!log.data.StatusInformation? null : log.data.StatusInformation.fram|null}}</td>
+            <td class="device_status7">{{!log.data.StatusInformation? null : log.data.StatusInformation.flash|null}}</td>
+            <td class="device_status8">{{!log.data.StatusInformation? null : log.data.StatusInformation.rfid|null}}</td>
+            <td class="device_status9">{{!log.data.StatusInformation? null : log.data.StatusInformation.do_1|null}}</td>
+            <td class="device_status10">{{!log.data.StatusInformation? null : log.data.StatusInformation.do_2|null}}</td>
+
+            <td class="ad1">{{!log.data.StatusInformation? null : log.data.StatusInformation.os_1|null}}</td>
+            <td class="ad2">{{!log.data.StatusInformation? null : log.data.StatusInformation.os_2|null}}</td>
+            <td class="lp">{{!log.data.vhi ? null : log.data.vhi.lp|null}}</td>
+            <td class="idlx">{{!log.data.StatusInformation? null : log.data.StatusInformation.DriverID|null}}</td>
+            <td class="drst">{{!log.data.StatusInformation? null : log.data.StatusInformation.drst|null}}</td>
+            <td class="drn">{{!log.data.dvi ? null : log.data.dvi.drn|null}}</td>
+            <td class="drl">{{!log.data.dvi ? null : log.data.dvi.drl|null}}</td>
+            <td class="tglx">{{!log.data.drs ? null : log.data.drs.drvt|null}}</td>
+            <td class="slvtd">{{!log.data.drs ? null : log.data.drs.osn|null}}</td>
+            <td class="slddtn">{{!log.data.drs ? null : log.data.drs.stpn|null}}</td>
+            <td class="tglxlt">{{!log.data.drs ? null : log.data.drs.drvc|null}}</td>
+            <td class="slqtg">{{!log.data.drs ? null : log.data.drs.dotn|null}}</td>
+            <td class="tdltxx">{{!log.data.drf ? null : log.data.drf.sfp|null}}</td>
+            <td class="cb1">{{!log.data.drs ? null : log.data.drs.exts_1|null}}</td>
+            <td class="cb2">{{!log.data.drs ? null : log.data.drs.exts_2|null}}</td>
+            <td class="cb3">{{!log.data.drs ? null : log.data.drs.exts_3|null}}</td>
+          </tr>
+          <tr>
+            <td colspan="20">
+              <button (click)="getMoreLogs()" class="btn btn-sm btn-secondary">Xem thêm +20</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="loading" *ngIf="loading">
+        <p>Đang tải dữ liệu...</p>
+      </div>
+    </div>
+  </div>
+</div>

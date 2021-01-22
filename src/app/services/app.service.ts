@@ -51,6 +51,16 @@ export class AppService {
     }).toPromise();
   }
 
+  getErrorLog(filters: any, all = false): Promise<any> {
+    const {username, password} = environment.user;
+    return this.http.post(environment.host + '/error', {filters, all}, {
+      headers: {
+        Username: username,
+        Password: password
+      }
+    }).toPromise();
+  }
+
   auth(username: string, password: string): Promise<any> {
     return this.http.post(environment.host + '/auth', {}, {
       headers: {

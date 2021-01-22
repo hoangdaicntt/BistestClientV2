@@ -13,6 +13,9 @@ thead {
   background-color: #F5F5F5;
 }
 
+thead th {
+}
+
 .loading {
   position: absolute;
   width: 100%;
