@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppService} from '../../services/app.service';
 import {ExportService} from '../../services/export.service';
 import * as moment from 'moment';
@@ -20,11 +20,17 @@ export class ErrorLogComponent implements OnInit {
     },
     afterId: null,
     startId: null,
-    limit: 20
+    limit: 20,
+    error: ''
   };
   inputSelectAll = false;
   loading = true;
-
+  errors = ['Utc rt/hb is out of range',
+    'Course is out of range',
+    'Speed is out of range',
+    'Lat is out of range',
+    'Lon is out of range',
+    'Lat or Lon is zero'];
 
   constructor(private appService: AppService,
               private exportService: ExportService) {
@@ -47,7 +53,7 @@ export class ErrorLogComponent implements OnInit {
       date: {
         from: moment(this.filters.date.from, 'YYYY-MM-DDTHH:mm').toDate(),
         to: moment(this.filters.date.to, 'YYYY-MM-DDTHH:mm').toDate()
-      }
+      },
     };
     if (all) {
       dataFilter.afterId = this.filters.startId;

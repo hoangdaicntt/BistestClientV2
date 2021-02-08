@@ -38,6 +38,13 @@
             </div>
             <input (change)="getFilterLogs();" [(ngModel)]="filters.imei" type="text" class="form-control"
                    placeholder="Nhập từ khóa tìm kiếm...">
+            <div class="input-group-prependx">
+              <span class="input-group-textx"></span>
+            </div>
+            <select [(ngModel)]="filters.error" (change)="getFilterLogs();" class="form-control">
+              <option value="">Tất cả</option>
+              <option *ngFor="let e of errors">{{e}}</option>
+            </select>
           </div>
         </div>
         <div class="input-group input-group-alt col-6">
@@ -122,7 +129,7 @@
             <td>{{log.data.Type|null}}</td>
             <td>{{log.imei|null}}</td>
             <td>{{log.error|null}}</td>
-            <td>{{!log.data.StatusInformation? null : log.data.StatusInformation.drid|null}}</td>
+            <td>{{!log.data.StatusInformation ? null : log.data.StatusInformation.drid|null}}</td>
 
             <td class="imei">{{!log.data.dvi ? null : log.data.dvi.btv|null}}</td>
             <td class="imei">{{!log.data.dvi ? null : log.data.dvi.sim|null}}</td>
@@ -137,26 +144,33 @@
 
             <td class="gcd">{{!log.data.LocationData ? null : log.data.LocationData.Course|null}}</td>
             <td class="vt">{{!log.data.LocationData ? null : log.data.LocationData.Speed|null}}</td>
-            <td class="cdGSM">{{!log.data.StatusInformation? null : log.data.StatusInformation.gsig|null}}</td>
-            <td class="nd1">{{!log.data.StatusInformation? null : log.data.StatusInformation.temp_1|null}}</td>
-            <td class="nd2">{{!log.data.StatusInformation? null : log.data.StatusInformation.temp_2|null}}</td>
+            <td class="cdGSM">{{!log.data.StatusInformation ? null : log.data.StatusInformation.gsig|null}}</td>
+            <td class="nd1">{{!log.data.StatusInformation ? null : log.data.StatusInformation.temp_1|null}}</td>
+            <td class="nd2">{{!log.data.StatusInformation ? null : log.data.StatusInformation.temp_2|null}}</td>
 
-            <td class="device_status1">{{!log.data.StatusInformation? null : log.data.StatusInformation.gsm|null}}</td>
-            <td class="device_status2">{{!log.data.StatusInformation? null : log.data.StatusInformation.GPS|null}}</td>
-            <td class="device_status3">{{!log.data.StatusInformation? null : log.data.StatusInformation.acc|null}}</td>
-            <td class="device_status4">{{!log.data.StatusInformation? null : log.data.StatusInformation.airc|null}}</td>
-            <td class="device_status5">{{!log.data.StatusInformation? null : log.data.StatusInformation.door|null}}</td>
-            <td class="device_status6">{{!log.data.StatusInformation? null : log.data.StatusInformation.fram|null}}</td>
-            <td class="device_status7">{{!log.data.StatusInformation? null : log.data.StatusInformation.flash|null}}</td>
-            <td class="device_status8">{{!log.data.StatusInformation? null : log.data.StatusInformation.rfid|null}}</td>
-            <td class="device_status9">{{!log.data.StatusInformation? null : log.data.StatusInformation.do_1|null}}</td>
-            <td class="device_status10">{{!log.data.StatusInformation? null : log.data.StatusInformation.do_2|null}}</td>
+            <td class="device_status1">{{!log.data.StatusInformation ? null : log.data.StatusInformation.gsm|null}}</td>
+            <td class="device_status2">{{!log.data.StatusInformation ? null : log.data.StatusInformation.GPS|null}}</td>
+            <td class="device_status3">{{!log.data.StatusInformation ? null : log.data.StatusInformation.acc|null}}</td>
+            <td
+              class="device_status4">{{!log.data.StatusInformation ? null : log.data.StatusInformation.airc|null}}</td>
+            <td
+              class="device_status5">{{!log.data.StatusInformation ? null : log.data.StatusInformation.door|null}}</td>
+            <td
+              class="device_status6">{{!log.data.StatusInformation ? null : log.data.StatusInformation.fram|null}}</td>
+            <td
+              class="device_status7">{{!log.data.StatusInformation ? null : log.data.StatusInformation.flash|null}}</td>
+            <td
+              class="device_status8">{{!log.data.StatusInformation ? null : log.data.StatusInformation.rfid|null}}</td>
+            <td
+              class="device_status9">{{!log.data.StatusInformation ? null : log.data.StatusInformation.do_1|null}}</td>
+            <td
+              class="device_status10">{{!log.data.StatusInformation ? null : log.data.StatusInformation.do_2|null}}</td>
 
-            <td class="ad1">{{!log.data.StatusInformation? null : log.data.StatusInformation.os_1|null}}</td>
-            <td class="ad2">{{!log.data.StatusInformation? null : log.data.StatusInformation.os_2|null}}</td>
+            <td class="ad1">{{!log.data.StatusInformation ? null : log.data.StatusInformation.os_1|null}}</td>
+            <td class="ad2">{{!log.data.StatusInformation ? null : log.data.StatusInformation.os_2|null}}</td>
             <td class="lp">{{!log.data.vhi ? null : log.data.vhi.lp|null}}</td>
-            <td class="idlx">{{!log.data.StatusInformation? null : log.data.StatusInformation.DriverID|null}}</td>
-            <td class="drst">{{!log.data.StatusInformation? null : log.data.StatusInformation.drst|null}}</td>
+            <td class="idlx">{{!log.data.StatusInformation ? null : log.data.StatusInformation.DriverID|null}}</td>
+            <td class="drst">{{!log.data.StatusInformation ? null : log.data.StatusInformation.drst|null}}</td>
             <td class="drn">{{!log.data.dvi ? null : log.data.dvi.drn|null}}</td>
             <td class="drl">{{!log.data.dvi ? null : log.data.dvi.drl|null}}</td>
             <td class="tglx">{{!log.data.drs ? null : log.data.drs.drvt|null}}</td>
