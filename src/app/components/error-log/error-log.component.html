@@ -43,6 +43,7 @@
             </div>
             <select [(ngModel)]="filters.error" (change)="getFilterLogs();" class="form-control">
               <option value="">Tất cả</option>
+              <option value="Utc rt">Utc rt/hb is out of range</option>
               <option *ngFor="let e of errors">{{e}}</option>
             </select>
           </div>

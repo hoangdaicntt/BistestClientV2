@@ -64,6 +64,9 @@ export class DeviceUnmixComponent implements OnInit {
         }
         this.filters.startId = value.data.startList[0] ? value.data.startList[0]._id : null;
       }
+    } else {
+      alert('Cannot get data!!');
+      this.logs = [];
     }
     this.loading = false;
   }

@@ -25,7 +25,7 @@ export class ErrorLogComponent implements OnInit {
   };
   inputSelectAll = false;
   loading = true;
-  errors = ['Utc rt/hb is out of range',
+  errors = [
     'Course is out of range',
     'Speed is out of range',
     'Lat is out of range',
@@ -72,6 +72,9 @@ export class ErrorLogComponent implements OnInit {
         }
         this.filters.startId = value.data.startList[0] ? value.data.startList[0]._id : null;
       }
+    } else {
+      alert('Cannot get data!!');
+      this.logs = [];
     }
     this.loading = false;
   }
