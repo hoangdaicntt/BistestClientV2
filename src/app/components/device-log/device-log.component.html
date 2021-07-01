@@ -64,6 +64,7 @@
             <th class="logId" rowspan="2">Mã bản tin</th>
             <th class="deviceId" rowspan="2">Dòng thiết bị</th>
             <th class="imei" rowspan="2">IMEI</th>
+            <th class="lp" rowspan="2">Biển số</th>
             <th class="fwv" rowspan="2">Firmware version</th>
             <th class="btv" rowspan="2">Boot version</th>
             <th class="sim" rowspan="2">Serial sim</th>
@@ -119,6 +120,7 @@
             <td>{{log._id}}</td>
             <td>{{log.type}}</td>
             <td>{{log.imei}}</td>
+            <td>{{log.lp}}</td>
             <td>{{!log.dvi ? null : log.dvi.fwv}}</td>
 
             <td class="imei">{{!log.dvi ? null : log.dvi.btv}}</td>

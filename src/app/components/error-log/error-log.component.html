@@ -73,6 +73,7 @@
             <th class="logId" rowspan="2">Mã bản tin</th>
             <th class="deviceId" rowspan="2">Dòng thiết bị</th>
             <th class="imei" rowspan="2">IMEI</th>
+            <th class="lp" rowspan="2">Biển số</th>
             <th class="fwv" rowspan="2">Message error</th>
             <th class="fwv" rowspan="2">Firmware version</th>
             <th class="btv" rowspan="2">Boot version</th>
@@ -129,6 +130,7 @@
             <td>{{log._id|null}}</td>
             <td>{{log.data.Type|null}}</td>
             <td>{{log.imei|null}}</td>
+            <td>{{log.lp|null}}</td>
             <td>{{log.error|null}}</td>
             <td>{{!log.data.StatusInformation ? null : log.data.StatusInformation.drid|null}}</td>
 

@@ -45,7 +45,8 @@
             <button class="btn btn-secondary">Khoảng ngày</button>
           </div>
           <div class="input-group">
-            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.from" type="datetime-local" class="form-control"
+            <input (change)="getFilterLogs();" [(ngModel)]="filters.date.from" type="datetime-local"
+                   class="form-control"
                    placeholder="Từ ngày">
             <input (change)="getFilterLogs();" [(ngModel)]="filters.date.to" type="datetime-local" class="form-control"
                    placeholder="Đến ngày">
@@ -58,7 +59,7 @@
           <!-- thead -->
           <thead>
           <tr>
-            <th colspan="6">Quản lý</th>
+            <th colspan="7">Quản lý</th>
             <th colspan="8">Login</th>
             <th colspan="27">REALTIME / ALARM / RESEND../</th>
           </tr>
@@ -68,6 +69,7 @@
             <th>Loại gói tin MIX</th>
             <th>Dòng thiết bị</th>
             <th>Imei thiết bị</th>
+            <th>Biển số</th>
             <th>ID thiết bị</th>
 
             <th>Imei thiết bị</th>
@@ -116,6 +118,7 @@
             <td>{{log.event|null}}</td>
             <td>{{log.type|null}}</td>
             <td>{{log.imei|null}}</td>
+            <td>{{log.lp|null}}</td>
             <td>{{log.deviceId|null}}</td>
 
             <td [ngClass]="{'hidden':log.type!=='login'}">{{log.imei|null}}</td>
@@ -129,7 +132,8 @@
             <td [ngClass]="{'hidden':log.type!=='login'}">{{!log.dvi ? null : log.dvi.sim|null}}</td>
             <td [ngClass]="{'hidden':log.type!=='login'}">{{!log.dvi ? null : log.dvi.lr|null}}</td>
 
-            <td [ngClass]="{'hidden':log.type==='login'}">{{!log.loc ? null : log.loc.utc| date:'HH:mm:ss dd/MM/YYYY'}}</td>
+            <td
+              [ngClass]="{'hidden':log.type==='login'}">{{!log.loc ? null : log.loc.utc| date:'HH:mm:ss dd/MM/YYYY'}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}">{{!log.loc ? null : log.loc.lat}}
               -{{!log.loc ? null : log.loc.lon|null}}</td>
             <td [ngClass]="{'hidden':log.type==='login'}">{{!log.loc ? null : log.loc.course|null}}</td>

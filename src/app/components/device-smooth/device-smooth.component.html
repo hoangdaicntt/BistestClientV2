@@ -58,7 +58,7 @@
           <!-- thead -->
           <thead>
           <tr>
-            <th colspan="7">Quản lý</th>
+            <th colspan="8">Quản lý</th>
             <th colspan="8">Login</th>
             <th colspan="27">REALTIME / ALARM / RESEND../</th>
           </tr>
@@ -69,6 +69,7 @@
             <th>Loại gói tin MIX</th>
             <th>Dòng thiết bị</th>
             <th>Imei thiết bị</th>
+            <th>Biển số</th>
             <th>ID thiết bị</th>
 
             <th>IMEI thiết bị Login</th>
@@ -124,6 +125,7 @@
             <td>{{log.event|null}}</td>
             <td>{{log.type|null}}</td>
             <td>{{log.imei|null}}</td>
+            <td>{{log.lp|null}}</td>
             <td>{{log.deviceId|null}}</td>
 
             <td [ngClass]="{'hidden':log.type!=='login'}">{{log.imei|null}}</td>
